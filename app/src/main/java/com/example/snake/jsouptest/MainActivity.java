@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 // 링크정보
                 str +=  "주소: " + elements.get(i).attr("href")+ "\n";
                 str +=  "------------------------------------------" + "\n";;
+                
+                System.out.println(str);
 
             }
 
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            // bug!! ux, thread..
             try {
                 getHomepageInfo();
 
