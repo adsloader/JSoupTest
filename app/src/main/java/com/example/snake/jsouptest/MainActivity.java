@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            // bug!! ux, thread..
+            // bug!!!!!!(think about ui thread..)
             try {
                 getHomepageInfo();
 
