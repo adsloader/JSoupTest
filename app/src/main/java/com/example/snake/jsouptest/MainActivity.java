@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 // 링크정보
                 str +=  "주소: " + elements.get(i).attr("href")+ "\n";
                 str +=  "------------------------------------------" + "\n";;
+                
+                System.out.println(str);
 
             }
             System.out.println(str);
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            // bug!!!!!!(think about ui thread..)
             try {
                 // 동기화 버그가 있음.
                 //getHomepageInfo();
