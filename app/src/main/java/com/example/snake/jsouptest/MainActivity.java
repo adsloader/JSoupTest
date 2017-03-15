@@ -44,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 try{
 
                     // get()메소드를 사용해서 onPostExecute가 실행될 때까지 멈추어있는다.
-                    new getTask().execute().get();
+                    //new getTask().execute().get();
+
+                    // 위를 주석처리 해결책
+                    getTask tsk = new getTask();
+                    tsk.execute().get();
+
+                    txtMessage.setText(tsk.GET_HTML_RESPONSE);
 
                 } catch (Exception e){
 
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // www.daum.net 홈페이지 소스를 가져와 a tag의 정보를 보여주는 메소드
-    private void getHomepageInfo() throws Exception {
+    private String getHomepageInfo() throws Exception {
 
         // Jsop을 이용해 URL의 HTML 소스를 가져온다.
         Document document = Jsoup.connect("http://www.daum.net").get();
@@ -78,9 +84,13 @@ public class MainActivity extends AppCompatActivity {
                 str +=  "------------------------------------------" + "\n";;
 
             }
+            System.out.println(str);
 
-            txtMessage.setText(str);
+            // 동기화 버그.
+            //txtMessage.setText(str);
         }
+
+        return str;
     }
 
 
@@ -89,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
     // onPreExecute -> doInBackground -> onPostExecute 순서로 실행된다.
 
     class getTask extends AsyncTask{
+        public String GET_HTML_RESPONSE = "";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -97,7 +109,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
-                getHomepageInfo();
+                // 동기화 버그가 있음.
+                //getHomepageInfo();
+
+                // 위를 주석처리 해결책
+                GET_HTML_RESPONSE = getHomepageInfo();
+
 
             } catch (Exception e){
                 e.printStackTrace();
